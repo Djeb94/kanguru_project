@@ -1,64 +1,85 @@
-const clientId = 'cl13nT';
-const clientSecret = '53c!r3t';
-const grantType = 'client_credentials';
+const axios = require('axios');
+const querystring = require('querystring');
+const express = require('express');
+const cors = require('cors');
+const app = express();
+const PORT = process.env.PORT || 5000;
 
-// Créer les paramètres de la requête pour obtenir le jeton d'accès
-const tokenParams = new URLSearchParams();
-tokenParams.append('client_id', clientId);
-tokenParams.append('client_secret', clientSecret);
-tokenParams.append('grant_type', grantType);
+app.use(cors());
+app.use(express.urlencoded({ extended: true })); // Middleware pour parser le corps des requêtes en x-www-form-urlencoded
 
-// Configurer la requête pour obtenir le jeton d'accès
-const tokenRequestOptions = {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded',
-  },
-  body: tokenParams,
-};
+const BASE_URL = 'https://kangurus.com/technical-interviews/api';
 
-// Effectuer la requête pour obtenir le jeton d'accès
-fetch('https://kangurus.com/technical-interviews/api/access-token', tokenRequestOptions)
-  .then(response => response.json())
-  .then(data => {
+// Route pour obtenir le jeton d'accès
+app.get('/access-token', async (req, res) => {
+  const clientId = 'cl13nT';
+  const clientSecret = '53c!r3t';
+  const grantType = 'client_credentials';
+
+  const tokenParams = new URLSearchParams();
+  tokenParams.append('client_id', clientId);
+  tokenParams.append('client_secret', clientSecret);
+  tokenParams.append('grant_type', grantType);
+
+  const tokenRequestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: tokenParams,
+  };
+
+  try {
+    const response = await fetch(`${BASE_URL}/access-token`, tokenRequestOptions);
+    if (!response.ok) {
+      throw new Error(`Erreur HTTP ${response.status} - ${response.statusText}`);
+    }
+    const data = await response.json();
     const accessToken = data.access_token;
-    console.log('Access Token:', accessToken);
-
-    // Utiliser le jeton d'accès pour authentifier les requêtes ultérieures à l'API
-    // Maintenant, effectuer une demande de connexion du joueur en incluant le jeton d'accès
-    const playerLoginParams = {
-      username: 'john.doe@example.com',
-      password: 'p4s5W0rDL33t'
-    };
-
-    // Configurer la requête pour la connexion du joueur
-    const playerLoginOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken}` // Inclure le jeton d'accès dans l'en-tête d'autorisation
-      },
-      body: JSON.stringify(playerLoginParams), // Convertir les paramètres en JSON
-    };
-
-    // Effectuer la requête pour la connexion du joueur
-    fetch('https://kangurus.com/technical-interviews/api/player/login', playerLoginOptions)
-      .then(response => {
-        // Vérifier si la réponse est un code d'état HTTP 200 OK
-        if (!response.ok) {
-          // Si la réponse n'est pas OK, générer une erreur avec les détails de la réponse
-          throw new Error(`Erreur HTTP ${response.status} - ${response.statusText}`);
-        }
-        return response.json();
-      })
-      .then(playerData => {
-        console.log('Données du joueur:', playerData);
-      })
-      .catch(error => {
-        // Capturer et afficher l'erreur
-        console.error('Erreur lors de la requête de connexion du joueur:', error);
-      });
-  })
-  .catch(error => {
+    console.log('Access Token:', accessToken); // Log du jeton d'accès dans le terminal
+    res.json({ access_token: accessToken });
+  } catch (error) {
     console.error('Erreur lors de la récupération du jeton d\'accès:', error);
-  });
+    res.status(500).json({ error: 'Erreur lors de la récupération du jeton d\'accès' });
+  }
+});
+
+// Route pour la connexion de l'utilisateur
+// Route pour la connexion de l'utilisateur
+app.post('/player/login', async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    // Récupération du token d'accès depuis l'en-tête Authorization
+    const accessToken = req.headers.authorization.split('Bearer ')[1];
+
+    // Envoi des données de connexion à l'API distante
+    const response = await axios.post(
+      'https://kangurus.com/technical-interviews/api/player/login',
+      { username, password }, // Utilisation directe de l'objet
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+      
+    );
+    // Vérification de la réponse de l'API distante
+      console.log('succes');
+      res.status(200).json(response.data);
+      const userId = response.data.player.id;
+      console.log(userId);
+      
+    
+  } catch (error) {
+    // Erreur lors de la connexion à l'API distante
+    console.error('Erreur lors de la connexion du joueur:', error);
+    res.status(500).json({ error: 'Erreur lors de la connexion du joueur' });
+  }
+});
+
+
+app.listen(PORT, () => {
+  console.log(`Serveur Express démarré sur le port ${PORT}`);
+});
