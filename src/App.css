@@ -2,6 +2,15 @@
   text-align: center;
 }
 
+@font-face{
+  font-family: 'MyFont';
+    src: local('MyFont'), url(./fonts/Loomattic-Regular.woff2) format('woff');
+  }
+  @font-face{
+    font-family: 'MyFont2';
+    src: local('MyFont2'), url(./fonts/Nunito-Regular.ttf) format('woff');
+  }
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
