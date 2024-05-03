@@ -18,7 +18,7 @@ function Main() {
         <a>DISCOVER</a>
         <a>FEATURES</a>
         <a>SEASONS</a>
-        <Link to="/login"> {/* Lien vers la page de connexion */}
+        <Link to="/login" id="link">
           <button id="login">&#x2022; Log In &#x2022;</button>
         </Link>
         <button id="signup2">&#x2022; Sign Up &#x2022;</button>
