@@ -1,31 +1,40 @@
-import React, { useState } from "react"; // Importation de React et du hook useState depuis la bibliothèque react
-import { Link } from "react-router-dom"; // Importation de la composante Link depuis la bibliothèque react-router-dom
-import "./main.css"; // Importation des styles CSS du composant
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import "./main.css";
 
 function Main() {
-  const [showSubMenu, setShowSubMenu] = useState(false); // Déclaration de l'état local showSubMenu avec useState, initialisé à false
+  const [showSubMenu, setShowSubMenu] = useState(false);
+  const playerId = localStorage.getItem('playerId');
+  const playerInfos = JSON.parse(localStorage.getItem('playerInfos'));
 
-  // Fonction pour basculer l'affichage du sous-menu
+
+
   const toggleSubMenu = () => {
-    setShowSubMenu(!showSubMenu); // Inversion de la valeur de showSubMenu
+    setShowSubMenu(!showSubMenu);
   };
 
-  // Retourne la structure HTML du composant
   return (
     <div>
-      {/* Barre de navigation */}
       <div className="navbar">
         <a>DISCOVER</a>
         <a>FEATURES</a>
         <a>SEASONS</a>
-        <Link to="/login" id="link">
-          <button id="login">&#x2022; Log In &#x2022;</button>
-        </Link>
-        <button id="signup2">&#x2022; Sign Up &#x2022;</button>
+        {playerId ? (
+          <Link to="/">
+            <button>{playerInfos[0].nick_name}</button>
+          </Link>
+        ) : (
+          <div>
+            <Link to="/login" id="link">
+              <button id="login">&#x2022; Log In &#x2022;</button>
+            </Link>
+            <button id="signup">&#x2022; Sign Up &#x2022;</button>
+          </div>
+        )}
         <span className="material-symbols-outlined" id="toggle-menu" onClick={toggleSubMenu}>
           menu
         </span>
-        {/* Affichage du sous-menu s'il est activé */}
         {showSubMenu && (
           <div id="toogle-nav">
             <p>DISCOVER</p>
@@ -38,7 +47,6 @@ function Main() {
         )}
       </div>
 
-      {/* Contenu principal */}
       <div className="containeur">
         <div className="element1">
           <h2>SPACE <mark>KANGURUS</mark></h2>
@@ -49,7 +57,6 @@ function Main() {
         <div className="element2"></div>
       </div>
       
-      {/* Pied de page */}
       <div className="footer">
         <div className="sous-menu">
           <p id="first-menu">HOME</p>
@@ -71,4 +78,4 @@ function Main() {
   );
 }
 
-export default Main; // Exportation du composant Main
+export default Main;

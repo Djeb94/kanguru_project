@@ -79,6 +79,36 @@ app.post('/player/login', async (req, res) => {
   }
 });
 
+app.get('/player/:id', async (req, res) => {
+  const playerId = req.params.id;
+
+  try {
+    // Get access token from header
+    const authHeader = req.headers.authorization;
+    const accessToken = authHeader.split('Bearer ')[1];
+    
+    // Fetch player data using player id and access token
+    const response = await axios.get(`https://kangurus.com/technical-interviews/api/player/?id=${playerId}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    // Check if player data was fetched successfully
+    if (response.data.player) {
+      res.json([response.data.player]); // Mettre les informations du joueur dans un tableau
+      console.log(response.data)
+    } else {
+      res.status(404).json({ error: 'Player not found' });
+    }
+  } catch (error) {
+    console.error('Error fetching player data:', error);
+    res.status(500).json({ error: 'Error fetching player data' });
+  }
+});
+
+
+
 
 app.listen(PORT, () => {
   console.log(`Serveur Express démarré sur le port ${PORT}`);

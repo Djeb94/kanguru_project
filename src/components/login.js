@@ -12,16 +12,22 @@ function LoginForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     try {
       // Récupération du token d'accès depuis l'API
       const access_token = await fetchAccessToken();
-
+  
       // Envoi des données de connexion avec le token d'accès
       const playerData = await loginUser(username, password, access_token);
-
+  
       console.log('Données du joueur :', playerData);
-      // Gérer la réponse du serveur ici, par exemple, rediriger l'utilisateur si la connexion réussit
+
+      // Récupération des informations du joueur avec le token d'accès et le playerId
+      const playerInfos = await userInfo(access_token, playerData.player.id);
+
+  
+      // Redirection de l'utilisateur vers la page principale
+      navigate('/');
     } catch (error) {
       setError('Échec de la connexion. Veuillez vérifier vos identifiants.');
     }
@@ -30,6 +36,7 @@ function LoginForm() {
   const fetchAccessToken = async () => {
     try {
       const response = await axios.get('http://localhost:5000/access-token');
+      localStorage.setItem('token', response.data.access_token);
       return response.data.access_token;
     } catch (error) {
       throw new Error('Erreur lors de la récupération du token d\'accès');
@@ -48,11 +55,25 @@ function LoginForm() {
           Authorization: `Bearer ${access_token}`,
         },
       });
-      navigate('/');
-       localStorage.setItem('playerId', response.data.player.id);
-       console.log(response.data.player.id);
+      localStorage.setItem('playerId', response.data.player.id);
+      console.log(response.data.player.id);
+      return response.data;
     } catch (error) {
       throw new Error('Échec de la connexion. Veuillez vérifier vos identifiants.');
+    }
+  };
+
+  const userInfo = async (accessToken, playerId) => {
+    try {
+      const response = await axios.get(`http://localhost:5000/player/${playerId}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      console.log('Informations du joueur :', response.data);
+      localStorage.setItem('playerInfos', JSON.stringify(response.data));
+    } catch (error) {
+      console.error('Erreur lors de la récupération des informations du joueur :', error);
     }
   };
 
