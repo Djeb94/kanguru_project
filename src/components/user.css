@@ -1,0 +1,67 @@
+.containeur3 {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* 100% de la hauteur de la fenêtre */
+    background-image: url("../../background_planete4.png");
+    background-size: cover; /* Redimensionner l'image pour couvrir toute la surface */
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex; /* Pour centrer le contenu */
+    justify-content: center; /* Pour centrer horizontalement */
+    align-items: center; /* Pour centrer verticalement */
+    font-family: "MyFont";
+}
+
+
+.card {
+    position: absolute; /* Définir la position absolue */
+    top: 50%; /* Aligner le haut de la carte au milieu de son conteneur */
+    left: 50%; /* Aligner la gauche de la carte au milieu de son conteneur */
+    transform: translate(-50%, -50%); /* Déplacer la carte de -50% de sa largeur et hauteur */
+    text-align: center;
+    padding: 20px;
+    background-color: #61540195;
+    border-radius: 20px;
+    border: 2px solid #ffde00;
+    transition: all 250ms;
+    justify-content: center;
+    color: #ffde00;
+    width: 500px;
+    margin-bottom: 200px;
+}
+
+#text-profil{
+    margin-bottom: 100px;
+}
+.head-profil{
+    display: flex;
+    justify-content: space-around;
+    
+}
+#profil-avatar{
+    padding-top: 50px;
+}
+mark{
+    background-color: transparent;
+    font-size: 15   px;
+    color: #dbd298;
+}
+.main-profil{
+    text-align: left;
+}
+.secondary-profil{
+    text-align: left;
+    padding-left: 20px;
+    font-size: 12px;
+}
+#comeback{
+float: left;
+    margin-top: 20px;
+    color: #ffff;
+    margin-left: 12%;
+   font-family: "MyFont";
+   transition: all 250ms;
+}
+#comeback:hover{
+    opacity: 70%;
+}

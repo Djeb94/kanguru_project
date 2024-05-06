@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import "./login.css";
-import "./main.css";
+
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -25,7 +25,7 @@ function LoginForm() {
       // Récupération des informations du joueur avec le token d'accès et le playerId
       const playerInfos = await userInfo(access_token, playerData.player.id);
 
-  
+
       // Redirection de l'utilisateur vers la page principale
       navigate('/');
     } catch (error) {
@@ -75,39 +75,25 @@ function LoginForm() {
     } catch (error) {
       console.error('Erreur lors de la récupération des informations du joueur :', error);
     }
+
   };
 
   return (
-    <div className='containeur2'>
-      <Link to="/"><p id='back'>&#x2190; Retour</p></Link>
+    <div className='Alllog'>
+      <Link to="/"><p id='back'>&#x2190; back</p></Link>
       <div className='form'>
-        <h2>Connexion</h2>
+        <h2>Login</h2>
         {error && <p style={{ color: 'red' }}>{error}</p>}
         <form onSubmit={handleSubmit}>
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Nom d'utilisateur"/>
+          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username"/>
           <br />
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Mot de passe'/>
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Password'/>
           <br />
-          <button id='submit' type="submit">&#x2022; Soumettre &#x2022;</button>
+          <button id='submit' type="submit">&#x2022; Submit &#x2022;</button>
         </form>
-      </div>
-      <div className="footer2">
-        <div className="sous-menu">
-          <p id="first-menu">ACCUEIL</p>
-          <p>DÉCOUVRIR</p>
-          <p>FONCTIONNALITÉS</p>
-          <p>SAISONS</p>
-          <p id="logout">DÉCONNEXION</p>
-        </div>
-        <div>
-          <button id="steam2">&#x2022; Liste de souhaits sur Steam &#x2022;</button>
-        </div>
-        <div className="footer-right">
-          <p id="followus">NOUS SUIVRE</p>
-          <div id="reseau"></div>
-          <p id="footer-text">Lorem ipsum dolor sit amet. Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labor et</p>
-        </div>
-      </div>
+    </div>
+    <br></br>
+
     </div>
   );
 }

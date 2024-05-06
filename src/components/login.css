@@ -1,17 +1,22 @@
-.containeur2{
+.Alllog{
+    background-image: url("../../background_planete4.png");
+    background-size: 1900px;
+    background-color: #030d12;
+    background-position: center top -250px;
+    background-repeat: no-repeat;
     text-align: center;
-    margin-top: 150px;
-    display: inline;
+    padding-top: 200px;
 }
+
 .form{
     font-family: "MyFont";
     background-color: #03432d77;
     border: 2px solid #34febc;
     border-radius: 20px;
     padding: 40px 60px 60px 60px;
-    margin-top: 200px;
-    width: 250px;
-    margin-left: 550px;
+    width: 20%;
+    margin-bottom: 100px;
+    margin-left: 35%;
 }
 .form h2{
     color: #34febc;
@@ -22,7 +27,7 @@ input{
     outline: none;
     background: rgba(255, 255, 255, 0.562);
     padding: 1rem 1.5rem;
-    padding-left: calc(1rem * 3.5);
+    padding-left: 10%;
     border-radius: 100px;
     width: 77%;
     transition: background .5s;
@@ -42,8 +47,10 @@ input:focus {
     border: 2px solid #34febc ;
     transition: all 250ms;
     color: #34febc;
-    animation: zoom 3s infinite;
-        animation-fill-mode: unset;
+    transition: all 250ms;
+}
+#submit:hover{
+    opacity: 70%;
 }
 .footer2{
     margin-top: 200px;
@@ -54,8 +61,17 @@ input:focus {
 }
 #back{
     float: left;
-    margin-top: 0px;
+    margin-top: 20px;
     color: #ffff;
-    margin-left: 450px;
+    margin-left: 37%;
    font-family: "MyFont";
+   transition: all 250ms;
 }
+#back:hover{
+    opacity: 70%;
+}
+
+
+  
+    
+    

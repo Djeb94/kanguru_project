@@ -6,6 +6,8 @@ import LoginForm from './components/login'; // Importation du composant de formu
 import "./fonts/Loomattic-Regular.woff2"; // Importation du fichier de police Loomattic-Regular
 import "./fonts/Nunito-Regular.woff2"; // Importation du fichier de police Nunito-Regular
 import Main from './components/main'; // Importation du composant principal de l'application
+import User from './components/user';
+import ProtectedRoute from './components/protectedRoute';
 
 function App() {
   return (
@@ -14,6 +16,9 @@ function App() {
         <Routes> {/* Utilisation du composant Routes pour définir les routes de l'application */}
           <Route path="/" element={<Main />} /> {/* Définition de la route pour le composant Main */}
           <Route path='/login' element={<LoginForm/>}/> {/* Définition de la route pour le composant LoginForm */}
+          <Route element={<ProtectedRoute/>}>
+            <Route exact path='/user' element={<User/>}/>
+          </Route>
         </Routes>
       </Fragment>
     </Router>

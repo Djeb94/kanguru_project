@@ -108,8 +108,6 @@ app.get('/player/:id', async (req, res) => {
 });
 
 
-
-
 app.listen(PORT, () => {
   console.log(`Serveur Express démarré sur le port ${PORT}`);
 });

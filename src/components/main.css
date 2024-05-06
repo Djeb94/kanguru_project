@@ -1,7 +1,10 @@
 
-body{
+html{
+  background-color: #030d12;
+}
+.all{
     background-image: url("../../background_planete4.png");
-    background-size: cover;
+    background-size: 110%;
     background-color: #030d12;
     background-position: center top -225px;
     background-repeat: no-repeat;
@@ -19,6 +22,7 @@ body{
     position: fixed;
     width: 100%;
     text-align: center;
+    display: flex;
     backdrop-filter: blur(10px);
     max-height: 40px;
     padding-top: 20px;
@@ -27,9 +31,12 @@ body{
 }
 .navbar a{
     color: #ffff;
-    padding: 60px;
+    padding: 17px 60px 60px 60px;
     font-family: "MyFont";
     transition: all 250ms;
+}
+#navbarFirst{
+  margin-left: 200px;
 }
 
 .navbar a:hover{
@@ -42,10 +49,13 @@ body{
     justify-content: center;
     
 }
+.log-button{
+  width: 400px;
+}
 
 
 .element1{
-    margin-top: 200px;
+    margin-top: 300px;
     height: 300px;
     width: 300px;
 margin-left: 100px;
@@ -80,7 +90,7 @@ margin-left: 100px;
 }
 
 .element2{
-    margin-top: 125px;
+    margin-top: 209px;
     margin-left: 100px;
     background-image: url("../../kanguru_solider_space_armor.png");
     background-size: 80%;
@@ -146,6 +156,43 @@ margin-left: 100px;
   #signup2:hover{
     opacity: 70%;
   }
+  .navbar-info{
+    display: grid;
+    justify-content: center;
+  }
+  #link{
+    padding-bottom: 10px;
+  }
+  .infos-containeur{
+    display: flex;
+    margin-left: 40%;
+  }
+  #avatar{
+    margin-top: 20px;
+  }
+  
+  #logout-info{
+    background-color: transparent;
+    border: none;
+    font-family: "MyFont";
+    color: #ffde00;
+    font-size: 10px;
+    text-decoration: underline;
+    width: 100px;
+  }
+  #nickname{
+    margin-top: 10px;
+    color: #34febc;
+    font-family: "MyFont";
+    transition: all 250ms;
+    background-color: transparent;
+    cursor: unset;
+    border: none;
+  }
+  #nickname:hover{
+    letter-spacing: 2px;
+  }
+
 
   #login {
     margin-left: 140px;
@@ -239,6 +286,9 @@ margin-left: 100px;
     .element2{
       background-size: 415px;
   }
+  .all{
+    background-size: cover;
+  }
 }
 
 @media screen and (max-width: 1110px) {
@@ -256,6 +306,9 @@ margin-left: 100px;
 
   }
   #login{
+    margin-left: 60px;
+  }
+  #navbarFirst{
     margin-left: 100px;
   }
 
@@ -275,6 +328,10 @@ margin-left: 100px;
 #login{
   margin-left: 80px;
 }
+.navbar a {
+  padding-right: 15px;
+}
+
 
 }
 
@@ -320,20 +377,23 @@ margin-left: 100px;
  .material-symbols-outlined{
   display: inline;
   float: right;
-  padding-right: 20px;
   font-size: 40px;
   color: #34febc;
   cursor: pointer;
+  margin-right: 20px;
  }
  #toogle-nav{
-  display: block;
+  display: inline-block;
   color: #ffff;
-  float: right;
   background-color: #030d12b3;
   backdrop-filter: blur(10px);
-  width: 300px;
+  width: 900px;
   height: 400px;
   margin-top: 30px;
+  margin-right: 60px;
+ }
+ #toggle-menu{
+  width: 100%;
  }
  #toogle-nav p{
   font-family: "MyFont";
@@ -346,7 +406,7 @@ margin-left: 100px;
     text-decoration: underline;
  }
  #toogle-login{
-  margin-left: 85px;
+  margin-left: 27%;
   margin-top: 20px;
   font-family: "MyFont";
     background-color: #03432d77;
@@ -365,7 +425,7 @@ margin-left: 100px;
  }
  #toogle-signup{
   margin-top: 20px;
-  margin-left: 85px;
+  margin-left: 27%;
   font-family: "MyFont";
     background-color: #61540195;
     font-size: 14px;
@@ -382,75 +442,95 @@ margin-left: 100px;
   opacity: 70%;
  }
 
- @media screen and (max-width: 700px) {
+ @media screen and (max-width: 710px) {
   .footer{
+    text-align: center;
     margin-top: 20px;
     display:list-item;
   }
+  #followus{
+    margin-left: 0px;
+  }
   .sous-menu{
     display: flex;
+    margin-left: 20%;
   }
   .sous-menu p {
     margin-left: 40px;
   }
-  body{
+  .all{
     background-size: 2430px;
   }
   #logout{
     margin-top: 0px;
   }
   #footer-text{
+    max-width: 100%;
     margin-top: 0px;
-    margin-left: 190px;
-    max-width: 250px;
-  }
-  #first-menu{
-    margin-left: 160px;
-    margin-top: 0px;
+    margin-left: 0px;
+
   }
   #reseau{
-    margin-left: 180px;
+    margin-left: 34%;
     height: 30px;
     width: 250px;
     float: none;
   }
   #steam2{
-    margin-left: 250px;
+    margin-left: 0px;
   }
+  #first-menu{
+  margin-top: 0px;
+  }
+ }
+ @media screen and (max-width: 680px) {
+  .element2 {
+    margin-left: 10%;
+    width: 450px;
+    height: 500px;
+    }
+
  }
 
  @media screen and (max-width: 600px) {
   #reseau{
-    margin-left: 240px;
     margin-right: 0px;
     height: 20px;
     width: 150px;
-    position: sticky;
-    float: none;
   }
  }
 
  @media screen and (max-width: 540px) {
   #reseau{
-    margin-left: 180px;
     margin-right: 0px;
     height: 20px;
     width: 150px;
-    position: sticky;
-  }
-  #first-menu{
-    margin-left: 100px;
-  }
-  #steam2{
-    margin-left: 200px;
-  }
-  #followus{
-    margin-left: 245px;
-  }
-  #footer-text{
 
-    margin-left: 140px;
   }
+ 
+  #footer-text{ 
+    max-width: 200px;
+    margin-left: 30%;
+  }
+  .element2{
+    margin-left: 0px;
+  }
+  .element1{
+    margin-left: 60px;
+  }
+  
+ }
+ @media screen and (max-width: 500px) {
+  .sous-menu{
+    margin-left: 7%;
+  }
+  .element2{
+    background-size: 90%;
+    background-position: center bottom 0px;
+    margin-top: 35px;
+
+  }
+  
  }
 
  @media screen and (max-width: 440px) {
@@ -458,41 +538,54 @@ margin-left: 100px;
     margin-left: 140px;
   }
   #first-menu{
-    margin-left: 60px;
+    margin-left: 20px;
   }
-  #steam2{
-    margin-left: 160px;
-  }
-  #followus{
-    margin-left: 200px;
-  }
+  
   #footer-text{
 
     margin-left: 100px;
   }
  }
 
- @media screen and (max-width: 440px) {
-  #first-menu{
-    margin-left: 40px;
-  }
- }
 
- @media screen and (max-width: 380px) {
+ @media screen and (max-width: 400px) {
   #reseau{
     margin-left: 220px;
   }
   #first-menu{
     margin-left: 150px;
   }
-  #steam2{
-    margin-left: 240px;
-  }
-  #followus{
-    margin-left: 280px;
-  }
+  
   #footer-text{
-    margin-left: 250px;
+    margin-left: 80px;
+  }
+  .element2{
+    background-size: 80%;
+    background-position: center left -30px;
+    margin-top: 110px;
+
+  }
+  .element1{
+    margin-left: 20px;
+  }
+  .footer{
+    margin-top: 0px;
+  }
+  .sous-menu{
+    margin-left: 0px;
+  }
+  #first-menu{
+    margin-left: 20px;
+  }
+  #reseau{
+    margin-left: 100px;
+  }
+  .containeur{
+    background-image: url("../../background_planete4.png");
+    background-size: cover;
+    background-color: #030d12;
+    background-position: center top -70px;
+    background-repeat: no-repeat;
   }
  }
 
