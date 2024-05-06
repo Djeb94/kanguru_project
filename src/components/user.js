@@ -2,10 +2,12 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import "./user.css";
 
+
 function User() {
-    
-    const playerInfos = JSON.parse(localStorage.getItem('playerInfos'));
-    
+  // Récupération des informations du joueur depuis le localStorage
+  const playerInfos = JSON.parse(localStorage.getItem('playerInfos'));
+  // Le reste du code de votre composant User...
+ 
     return(
         <div className="containeur3">
         

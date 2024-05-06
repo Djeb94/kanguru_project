@@ -3,26 +3,28 @@ import { Link, useNavigate } from "react-router-dom"; // Import de navigate
 import "./main.css";
 
 function Main() {
-  const [showSubMenu, setShowSubMenu] = useState(false);
-  const playerId = localStorage.getItem('playerId');
-  const playerInfos = JSON.parse(localStorage.getItem('playerInfos'));
+  // Déclaration des états
+  const [showSubMenu, setShowSubMenu] = useState(false); // État pour afficher ou masquer le sous-menu
+  // Récupération des données du joueur depuis le localStorage
+  const playerId = localStorage.getItem('playerId'); // ID du joueur
+  const playerInfos = JSON.parse(localStorage.getItem('playerInfos')); // Informations du joueur
+  // Utilisation du hook de navigation pour la redirection
   const navigate = useNavigate();
 
-
+  // Fonction pour basculer l'affichage du sous-menu
   const toggleSubMenu = () => {
     setShowSubMenu(!showSubMenu);
+    // Modification des classes CSS pour l'icône du menu
     const toggleMenu = document.getElementById("toggle-menu");
     const icon = document.getElementById("toggle-icon");
-  
-    toggleMenu.classList.toggle("active");
-  
+    toggleMenu.classList.toggle("active"); // Ajout ou suppression de la classe "active" pour le menu
+    // Modification du texte de l'icône en fonction de l'état showSubMenu
     if (showSubMenu) {
-      icon.textContent = "menu";
+      icon.textContent = "menu"; // Si le sous-menu est affiché, l'icône devient "menu"
     } else {
-      icon.textContent = "close";
+      icon.textContent = "close"; // Sinon, l'icône devient "close"
     }
   };
-
   const handleLogout = () => {
     // Effacer les données du local storage
     localStorage.removeItem('playerId');

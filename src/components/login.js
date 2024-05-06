@@ -33,50 +33,67 @@ function LoginForm() {
     }
   };
 
-  const fetchAccessToken = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/access-token');
-      localStorage.setItem('token', response.data.access_token);
-      return response.data.access_token;
-    } catch (error) {
-      throw new Error('Erreur lors de la récupération du token d\'accès');
-    }
-  };
+  // Fonction pour récupérer le jeton d'accès
+const fetchAccessToken = async () => {
+  try {
+    // Envoie d'une requête GET pour récupérer le jeton d'accès
+    const response = await axios.get('http://localhost:5000/access-token');
+    // Stockage du jeton d'accès dans le localStorage
+    localStorage.setItem('token', response.data.access_token);
+    return response.data.access_token;
 
-  const loginUser = async (username, password, access_token) => {
-    try {
-      const loginParams = new URLSearchParams();
-      loginParams.append('username', username);
-      loginParams.append('password', password);
+  } catch (error) {
+    // Gestion des erreurs
+    throw new Error('Erreur lors de la récupération du token d\'accès');
+  }
+};
 
-      const response = await axios.post('http://localhost:5000/player/login', loginParams, {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          Authorization: `Bearer ${access_token}`,
-        },
-      });
-      localStorage.setItem('playerId', response.data.player.id);
-      console.log(response.data.player.id);
-      return response.data;
-    } catch (error) {
-      throw new Error('Échec de la connexion. Veuillez vérifier vos identifiants.');
-    }
-  };
+// Fonction pour connecter l'utilisateur
+const loginUser = async (username, password, access_token) => {
+  try {
+    // Création des paramètres de connexion
+    const loginParams = new URLSearchParams();
+    loginParams.append('username', username);
+    loginParams.append('password', password);
 
-  const userInfo = async (accessToken, playerId) => {
-    try {
-      const response = await axios.get(`http://localhost:5000/player/${playerId}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      console.log('Informations du joueur :', response.data);
-      localStorage.setItem('playerInfos', JSON.stringify(response.data));
-    } catch (error) {
-      console.error('Erreur lors de la récupération des informations du joueur :', error);
-    }
+    // Envoie d'une requête POST pour la connexion
+    const response = await axios.post('http://localhost:5000/player/login', loginParams, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Bearer ${access_token}`, 
+      },
+    });
+    // Stockage de l'ID du joueur dans le localStorage
+    localStorage.setItem('playerId', response.data.player.id);
+    // Affichage de l'ID du joueur dans la console
+    console.log(response.data.player.id);
 
-  };
+    return response.data;
+  } catch (error) {
+    // Gestion des erreurs
+    throw new Error('Échec de la connexion. Veuillez vérifier vos identifiants.');
+  }
+};
+
+// Fonction pour récupérer les informations du joueur
+const userInfo = async (accessToken, playerId) => {
+  try {
+    // Envoie d'une requête GET pour récupérer les informations du joueur
+    const response = await axios.get(`http://localhost:5000/player/${playerId}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`, 
+      },
+    });
+    // Affichage des informations du joueur dans la console
+    console.log('Informations du joueur :', response.data);
+    // Stockage des informations du joueur dans le localStorage
+    localStorage.setItem('playerInfos', JSON.stringify(response.data));
+  } catch (error) {
+    // Gestion des erreurs
+    console.error('Erreur lors de la récupération des informations du joueur :', error);
+  }
+};
+
 
   return (
     <div className='Alllog'>
